@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Polcars Automotores | Quilmes</title>
+<meta name="description" content="Usados seleccionados y 0KM multimarca en Quilmes. Financiación, permuta y consignación.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0d; --bg2:#131317; --card:#18181d; --line:#2a2a31;
+    --text:#f3f3f5; --muted:#a3a3ad; --accent:#e11d2e; --accent2:#ff4757;
+    --wa:#25d366; --radius:14px; --max:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block;max-width:100%}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:Archivo,sans-serif;line-height:1.05;letter-spacing:-.02em}
+  .eyebrow{color:var(--accent2);font-weight:600;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.4rem;border-radius:999px;font-weight:600;border:1px solid transparent;cursor:pointer;font-size:.95rem;transition:.2s}
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{background:var(--accent2)}
+  .btn-ghost{border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--text)}
+  .btn-wa{background:var(--wa);color:#06260f}
+
+  /* Header */
+  header{position:sticky;top:0;z-index:50;background:rgba(11,11,13,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:Archivo;font-weight:900;font-size:1.35rem;letter-spacing:-.03em}
+  .logo span{color:var(--accent)}
+  .logo small{display:block;font-size:.6rem;letter-spacing:.35em;color:var(--muted);font-weight:600;margin-top:-2px}
+  .nav ul{display:flex;gap:1.8rem;list-style:none;font-size:.92rem;color:var(--muted)}
+  .nav ul a:hover{color:var(--text)}
+  .menu-btn{display:none;background:none;border:0;color:var(--text);font-size:1.6rem;cursor:pointer}
+
+  /* Hero */
+  .hero{position:relative;padding:96px 0 80px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(60% 70% at 85% 30%,rgba(225,29,46,.28),transparent 60%),
+    linear-gradient(180deg,transparent 60%,var(--bg))}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:900;margin:14px 0 18px}
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero p{color:var(--muted);font-size:1.1rem;max-width:520px}
+  .hero .ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .hero-car{aspect-ratio:4/3;border-radius:24px;background:linear-gradient(145deg,#1f1f26,#0f0f12);border:1px solid var(--line);display:grid;place-items:center;position:relative}
+  .hero-car svg{width:82%;color:#3a3a44}
+  .badge{position:absolute;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:.82rem}
+  .badge b{display:block;font-family:Archivo;font-size:1.25rem}
+  .badge.b1{left:-18px;bottom:28px}.badge.b2{right:-14px;top:24px}
+  .stats{display:flex;gap:36px;margin-top:40px;flex-wrap:wrap}
+  .stats b{font-family:Archivo;font-size:1.8rem;display:block}
+  .stats span{color:var(--muted);font-size:.85rem}
+
+  /* Services */
+  section{padding:84px 0}
+  .head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:36px;flex-wrap:wrap}
+  .head h2{font-size:clamp(2rem,4vw,2.8rem);margin-top:8px}
+  .services{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .svc{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px 20px;transition:.2s}
+  .svc:hover{border-color:var(--accent);transform:translateY(-3px)}
+  .svc .ic{width:44px;height:44px;border-radius:10px;background:rgba(225,29,46,.12);color:var(--accent2);display:grid;place-items:center;font-size:1.3rem;margin-bottom:16px}
+  .svc h3{font-size:1.1rem;margin-bottom:6px}
+  .svc p{color:var(--muted);font-size:.88rem}
+
+  /* Stock */
+  .stock{background:var(--bg2)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:transparent;border:1px solid var(--line);color:var(--muted);padding:.5rem 1rem;border-radius:999px;cursor:pointer;font:inherit;font-size:.88rem}
+  .chip.on{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .car{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column}
+  .car .ph{aspect-ratio:16/10;background:linear-gradient(135deg,#24242c,#141418);display:grid;place-items:center;position:relative}
+  .car .ph svg{width:62%;color:#3d3d48}
+  .tag{position:absolute;top:12px;left:12px;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:6px;background:var(--accent);letter-spacing:.05em}
+  .tag.used{background:#2d2d36}
+  .car .body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .car h3{font-size:1.15rem}
+  .specs{display:flex;gap:14px;color:var(--muted);font-size:.84rem;flex-wrap:wrap}
+  .car .foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:12px;border-top:1px solid var(--line)}
+  .price{font-family:Archivo;font-weight:800;font-size:1.2rem}
+  .car .foot a{font-size:.85rem;font-weight:600;color:var(--wa)}
+  .note{color:var(--muted);font-size:.82rem;margin-top:22px;text-align:center}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+  .step{border-top:2px solid var(--line);padding-top:20px;counter-increment:s}
+  .step::before{content:"0" counter(s);font-family:Archivo;font-weight:900;font-size:2.4rem;color:var(--accent)}
+  .step h3{margin:6px 0 6px;font-size:1.15rem}
+  .step p{color:var(--muted);font-size:.9rem}
+
+  /* Financing calc */
+  .fin{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:linear-gradient(135deg,#1a0b0e,#131317);border:1px solid var(--line);border-radius:24px;padding:48px}
+  .fin h2{font-size:clamp(1.8rem,3.5vw,2.5rem);margin:8px 0 12px}
+  .fin p{color:var(--muted)}
+  .calc{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:24px;display:grid;gap:16px}
+  .calc label{font-size:.85rem;color:var(--muted);display:flex;justify-content:space-between}
+  .calc label b{color:var(--text)}
+  input[type=range]{width:100%;accent-color:var(--accent)}
+  .calc .out{border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;align-items:end}
+  .calc .out b{font-family:Archivo;font-size:1.8rem}
+  .calc small{color:var(--muted);font-size:.75rem}
+
+  /* Testimonials */
+  .testis{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .t{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .t .stars{color:#fbbf24;letter-spacing:2px}
+  .t p{margin:12px 0 18px;font-size:.95rem}
+  .t .who{display:flex;gap:12px;align-items:center;font-size:.88rem}
+  .t .av{width:38px;height:38px;border-radius:50%;background:#2d2d36;display:grid;place-items:center;font-weight:700}
+  .t .who span{color:var(--muted);display:block;font-size:.8rem}
+
+  /* Visit / contact */
+  .visit{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .map{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);min-height:380px}
+  .map iframe{width:100%;height:100%;min-height:380px;border:0;filter:grayscale(1) invert(.9) contrast(.9)}
+  .contact{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .contact h3{font-size:1.5rem;margin-bottom:6px}
+  .info{display:grid;gap:12px;margin:18px 0 22px;font-size:.95rem}
+  .info div{display:flex;gap:12px;color:var(--muted)}
+  .info b{color:var(--text);font-weight:500}
+  form{display:grid;gap:10px}
+  input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);color:var(--text);padding:.8rem 1rem;border-radius:10px;font:inherit;font-size:.92rem}
+  textarea{resize:vertical;min-height:80px}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  footer{border-top:1px solid var(--line);padding:36px 0;color:var(--muted);font-size:.85rem}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer .soc{display:flex;gap:18px}
+  footer .soc a:hover{color:var(--text)}
+
+  .wa-float{position:fixed;right:20px;bottom:20px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 8px 24px rgba(37,211,102,.35)}
+  .wa-float svg{width:30px;color:#fff}
+
+  @media (max-width:980px){
+    .services{grid-template-columns:repeat(2,1fr)}
+    .grid,.testis{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .hero .wrap,.fin,.visit{grid-template-columns:1fr}
+    .fin{padding:28px}
+  }
+  @media (max-width:720px){
+    .wrap{padding:0 16px}
+    .nav ul{display:none;position:absolute;top:68px;left:0;right:0;background:var(--bg);flex-direction:column;padding:20px;border-bottom:1px solid var(--line)}
+    .nav ul.open{display:flex}
+    .menu-btn{display:block}
+    .nav .btn{display:none}
+    .services,.grid,.testis,.steps,.row{grid-template-columns:1fr}
+    .badge.b1{left:8px}.badge.b2{right:8px}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="car" viewBox="0 0 240 100" fill="currentColor">
+    <path d="M22 70c-6 0-10-4-10-9v-9c0-5 3-8 8-9l26-5 28-20c6-4 12-6 20-6h50c8 0 14 2 20 7l22 19 30 5c7 1 12 6 12 13v5c0 5-4 9-10 9h-8a24 24 0 0 0-47 0H82a24 24 0 0 0-47 0zM98 30l-18 14h52V26h-20c-6 0-10 1-14 4zm44-4v18h56l-18-15c-3-2-6-3-10-3z"/>
+    <circle cx="58" cy="74" r="17"/><circle cx="178" cy="74" r="17"/>
+  </symbol>
+  <symbol id="wa" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5.1-1 .1-1.7-.1a15 15 0 0 1-1.5-.6c-2.7-1.2-4.4-3.9-4.6-4.1-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.6 2.1 1.1 1 2 1.3 2.3 1.4.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap nav">
+    <a href="#" class="logo">POL<span>CARS</span><small>AUTOMOTORES</small></a>
+    <ul id="menu">
+      <li><a href="#stock">Stock</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#financiacion">Financiación</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#visitanos">Visitanos</a></li>
+    </ul>
+    <a class="btn btn-wa" href="https://wa.me/5491131727310" target="_blank" rel="noopener"><svg width="18"><use href="#wa"/></svg>WhatsApp</a>
+    <button class="menu-btn" aria-label="Menú" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Concesionaria multimarca · Quilmes</div>
+      <h1>Tu próximo auto <em>empieza acá.</em></h1>
+      <p>Usados seleccionados y 0KM de todas las marcas. Financiación a tu medida, tomamos tu usado en parte de pago y vendemos el tuyo en consignación.</p>
+      <div class="ctas">
+        <a href="#stock" class="btn btn-primary">Ver stock disponible →</a>
+        <a href="#financiacion" class="btn btn-ghost">Simular financiación</a>
+      </div>
+      <div class="stats">
+        <div><b>+5.300</b><span>seguidores en Instagram</span></div>
+        <div><b>0KM</b><span>multimarca</span></div>
+        <div><b>100%</b><span>usados revisados</span></div>
+      </div>
+    </div>
+    <div class="hero-car">
+      <svg viewBox="0 0 240 100"><use href="#car"/></svg>
+      <div class="badge b1">Tomamos tu usado<b>Permuta</b></div>
+      <div class="badge b2">Cuotas fijas<b>Financiación</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="eyebrow">Qué hacemos</div><h2>Todo para tu auto, en un solo lugar</h2></div>
+    </div>
+    <div class="services">
+      <div class="svc"><div class="ic">✓</div><h3>Usados seleccionados</h3><p>Unidades revisadas y con papeles al día, listas para transferir.</p></div>
+      <div class="svc"><div class="ic">★</div><h3>0KM multimarca</h3><p>Conseguimos el modelo que buscás, de la marca que quieras.</p></div>
+      <div class="svc"><div class="ic">$</div><h3>Financiación</h3><p>Planes en cuotas adaptados a tu presupuesto. Solo con DNI.</p></div>
+      <div class="svc"><div class="ic">⇄</div><h3>Permuta</h3><p>Entregá tu usado como parte de pago y llevate uno mejor.</p></div>
+      <div class="svc"><div class="ic">◎</div><h3>Consignación</h3><p>Dejanos tu auto y lo vendemos por vos, sin vueltas.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="stock" class="stock">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="eyebrow">Stock</div><h2>Unidades disponibles</h2></div>
+      <div class="filters" id="filters">
+        <button class="chip on" data-f="all">Todos</button>
+        <button class="chip" data-f="usado">Usados</button>
+        <button class="chip" data-f="0km">0KM</button>
+        <button class="chip" data-f="pickup">Pick-ups</button>
+      </div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="note">* Unidades de ejemplo para el prototipo. Reemplazar con el stock real (fotos, km y precios).</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head"><div><div class="eyebrow">Cómo comprar</div><h2>Así de simple</h2></div></div>
+    <div class="steps">
+      <div class="step"><h3>Elegí tu auto</h3><p>Mirá el stock online o vení a verlo en persona a Quilmes.</p></div>
+      <div class="step"><h3>Dejá tu anticipo</h3><p>Reservá la unidad con una seña y asegurala para vos.</p></div>
+      <div class="step"><h3>Financiá o permutá</h3><p>Armamos el plan de pagos y tasamos tu usado en el momento.</p></div>
+      <div class="step"><h3>Llevátelo</h3><p>Nos encargamos de la transferencia y te entregamos las llaves.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="financiacion" style="padding-top:0">
+  <div class="wrap">
+    <div class="fin">
+      <div>
+        <div class="eyebrow">Financiación</div>
+        <h2>Calculá tu cuota en segundos</h2>
+        <p>Simulá cuánto pagarías por mes y consultanos por WhatsApp para recibir una propuesta personalizada.</p>
+      </div>
+      <div class="calc">
+        <label>Valor del auto <b id="vV"></b></label>
+        <input type="range" id="v" min="5000000" max="40000000" step="500000" value="18000000">
+        <label>Anticipo <b id="aV"></b></label>
+        <input type="range" id="a" min="0" max="80" step="5" value="40">
+        <label>Cuotas <b id="cV"></b></label>
+        <input type="range" id="c" min="12" max="60" step="6" value="36">
+        <div class="out"><div><small>Cuota estimada</small><br><b id="res"></b></div>
+          <a class="btn btn-wa" id="calcWa" target="_blank" rel="noopener">Consultar</a></div>
+        <small>Valor orientativo, no constituye oferta. Sujeto a aprobación crediticia.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="clientes" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="eyebrow">Clientes</div><h2>Ellos ya estrenaron</h2></div>
+      <a class="btn btn-ghost" href="https://www.instagram.com/polcarsautomotores/" target="_blank" rel="noopener">Ver más en Instagram →</a></div>
+    <div class="testis">
+      <div class="t"><div class="stars">★★★★★</div><p>“Testimonio de cliente: reemplazar con una reseña real de los destacados de Instagram.”</p><div class="who"><div class="av">C</div><div>Nombre del cliente<span>Unidad entregada</span></div></div></div>
+      <div class="t"><div class="stars">★★★★★</div><p>“Testimonio de cliente: reemplazar con una reseña real de los destacados de Instagram.”</p><div class="who"><div class="av">C</div><div>Nombre del cliente<span>Unidad entregada</span></div></div></div>
+      <div class="t"><div class="stars">★★★★★</div><p>“Testimonio de cliente: reemplazar con una reseña real de los destacados de Instagram.”</p><div class="who"><div class="av">C</div><div>Nombre del cliente<span>Unidad entregada</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="visitanos" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><div><div class="eyebrow">Visitanos</div><h2>Te esperamos en Quilmes</h2></div></div>
+    <div class="visit">
+      <div class="map"><iframe loading="lazy" title="Mapa" src="https://maps.google.com/maps?q=Av.%20Urquiza%20410%2C%20Quilmes%2C%20Buenos%20Aires&z=15&output=embed"></iframe></div>
+      <div class="contact">
+        <h3>Hablemos</h3>
+        <div class="info">
+          <div>📍 <b>Av. Urquiza 410, esq. Rep. del Líbano, Quilmes</b></div>
+          <div>💬 <b>+54 9 11 3172-7310</b></div>
+          <div>🕘 <b>Lun a Vie 9–18 · Sáb 9–13</b>&nbsp;(a confirmar)</div>
+        </div>
+        <form id="form">
+          <div class="row"><input required name="n" placeholder="Nombre"><input name="t" placeholder="Teléfono"></div>
+          <select name="m"><option>Quiero comprar un auto</option><option>Quiero financiar</option><option>Quiero permutar mi usado</option><option>Quiero dejar mi auto en consignación</option></select>
+          <textarea name="x" placeholder="¿Qué auto estás buscando?"></textarea>
+          <button class="btn btn-wa" type="submit"><svg width="18"><use href="#wa"/></svg>Enviar por WhatsApp</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="logo">POL<span>CARS</span><small>AUTOMOTORES</small></div>
+    <div class="soc">
+      <a href="https://www.instagram.com/polcarsautomotores/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/polcarsautomotores/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.threads.com/@polcarsautomotores" target="_blank" rel="noopener">Threads</a>
+    </div>
+    <div>© 2026 Polcars Automotores · Quilmes, Buenos Aires</div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5491131727310" target="_blank" rel="noopener" aria-label="WhatsApp"><svg><use href="#wa"/></svg></a>
+
+<script>
+  const WA = "5491131727310";
+  const waLink = msg => `https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+  const fmt = n => "$ " + Math.round(n).toLocaleString("es-AR");
+
+  // Stock de ejemplo — reemplazar con datos reales
+  const cars = [
+    {m:"Toyota Hilux SRV 4x4", y:2021, km:"68.000", f:"Diésel", t:"usado", p:"pickup", $:"Consultar"},
+    {m:"Volkswagen Amarok V6", y:2020, km:"85.000", f:"Diésel", t:"usado", p:"pickup", $:"Consultar"},
+    {m:"Peugeot 208 Allure", y:2026, km:"0", f:"Nafta", t:"0km", p:"auto", $:"Consultar"},
+    {m:"Fiat Cronos Drive 1.3", y:2022, km:"42.000", f:"Nafta", t:"usado", p:"auto", $:"Consultar"},
+    {m:"Chevrolet Tracker LTZ", y:2026, km:"0", f:"Nafta", t:"0km", p:"auto", $:"Consultar"},
+    {m:"Ford Ranger XLT", y:2019, km:"98.000", f:"Diésel", t:"usado", p:"pickup", $:"Consultar"},
+  ];
+  const grid = document.getElementById("grid");
+  function render(f){
+    grid.innerHTML = cars.filter(c => f==="all" || c.t===f || c.p===f).map(c => `
+      <article class="car">
+        <div class="ph"><span class="tag ${c.t==="usado"?"used":""}">${c.t==="0km"?"0KM":"USADO"}</span><svg viewBox="0 0 240 100"><use href="#car"/></svg></div>
+        <div class="body">
+          <h3>${c.m}</h3>
+          <div class="specs"><span>${c.y}</span><span>${c.km} km</span><span>${c.f}</span></div>
+          <div class="foot"><span class="price">${c.$}</span>
+            <a href="${waLink(`Hola! Me interesa el ${c.m} ${c.y}`)}" target="_blank" rel="noopener">Consultar →</a></div>
+        </div>
+      </article>`).join("");
+  }
+  document.getElementById("filters").addEventListener("click", e => {
+    if(!e.target.dataset.f) return;
+    document.querySelectorAll(".chip").forEach(c => c.classList.toggle("on", c===e.target));
+    render(e.target.dataset.f);
+  });
+  render("all");
+
+  // Simulador (tasa orientativa)
+  const v=document.getElementById("v"), a=document.getElementById("a"), c=document.getElementById("c");
+  function calc(){
+    const P = v.value * (1 - a.value/100), n = +c.value, i = 0.045; // 4,5% mensual orientativo
+    const q = P * i / (1 - Math.pow(1+i, -n));
+    vV.textContent = fmt(v.value); aV.textContent = a.value+"% · "+fmt(v.value*a.value/100);
+    cV.textContent = n; res.textContent = fmt(q);
+    calcWa.href = waLink(`Hola! Quiero financiar un auto de ${fmt(v.value)} con ${a.value}% de anticipo en ${n} cuotas.`);
+  }
+  [v,a,c].forEach(el => el.addEventListener("input", calc)); calc();
+
+  // Formulario → WhatsApp
+  document.getElementById("form").addEventListener("submit", e => {
+    e.preventDefault();
+    const d = new FormData(e.target);
+    window.open(waLink(`Hola, soy ${d.get("n")}. ${d.get("m")}. ${d.get("x")||""} ${d.get("t")?"Tel: "+d.get("t"):""}`), "_blank");
+  });
+</script>
+</body>
+</html>

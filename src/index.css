@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #111214;
+  --color-carbon: #1a1c1f;
+  --color-carbon-2: #23262b;
+  --color-line: #31353b;
+  --color-bone: #edebe7;
+  --color-mute: #a1a5ac;
+  --color-accent: #e31e24;
+  --color-accent-ink: #f04a4a;
+  --color-on-accent: #ffffff;
+  --color-ok: #7fc8a0;
+  --color-danger: #f07a6a;
+
+  --font-display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade: fade 1.2s ease both;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes fade {
+    from { opacity: 0; transform: scale(1.04); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-ink font-sans text-bone antialiased;
+    min-height: 100svh;
+  }
+  /* Grano muy sutil para que el grafito no se vea plano */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+  input, select, textarea, button { font: inherit; color: inherit; }
+  select { color-scheme: dark; }
+  input[type="number"]::-webkit-inner-spin-button { display: none; }
+}
+
+@utility tnum { font-variant-numeric: tabular-nums lining-nums; }
+
+@utility eyebrow {
+  @apply font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-mute;
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] px-5 text-[0.95rem] font-semibold transition-[background-color,border-color,filter,color] duration-200 select-none disabled:opacity-50;
+}
+@utility btn-accent { @apply btn bg-accent text-on-accent hover:brightness-110; }
+@utility btn-light { @apply btn bg-bone text-ink hover:bg-white; }
+@utility btn-outline { @apply btn border border-line text-bone hover:border-bone; }
+@utility btn-ghost { @apply btn text-bone hover:bg-carbon-2; }
+
+@utility field {
+  @apply block w-full min-h-12 rounded-md border border-line bg-ink px-3.5 text-base text-bone placeholder:text-mute/70 transition-colors hover:border-mute/60 focus:border-accent focus:outline-none;
+}
+@utility label { @apply mb-1.5 block text-sm font-medium text-mute; }
+
+@utility chip {
+  @apply inline-flex min-h-10 items-center rounded-full border border-line px-4 text-sm text-mute transition-colors hover:border-mute hover:text-bone;
+  &[aria-pressed="true"] { @apply border-accent bg-accent/10 text-bone; }
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
