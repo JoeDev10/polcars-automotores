@@ -108,7 +108,7 @@ export default function AutoDetalle() {
         </Link>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-8 sm:px-6 lg:grid-cols-12 lg:gap-12">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 sm:px-6 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-7">
           <Gallery fotos={auto.fotos} alt={`${nombre} ${auto.version} ${auto.anio}`} />
         </div>
